@@ -1,0 +1,118 @@
+{
+    "id": "makerbot_replicator_2x",
+    "version": 2,
+    "name": "MakerBot Replicator 2X",
+    "inherits": "fdmprinter",
+    "metadata": {
+        "visible": true,
+        "author": "TheUltimakerCommunity",
+        "manufacturer": "MakerBot",
+        "category": "Other",
+        "file_formats": "application/x3g",
+        "platform_offset": [ 0, 0, 0 ],
+        "has_materials": true,
+        "preferred_material": "*generic_abs_175*",
+        "machine_extruder_trains": {
+            "0": "makerbot_rep2x_1st",
+            "1": "makerbot_rep2x_2nd"
+        },
+        "supported_actions": [ "MachineSettingsAction", "BedLevel" ],
+        "machine_x3g_variant": "r2x",
+        "supports_usb_connection": true
+    },
+    "overrides": {
+        "machine_name": { "default_value": "MakerBot Replicator 2X" },
+        "machine_gcode_flavor": {
+            "default_value": "Makerbot"
+        },
+        "machine_acceleration": {
+            "default_value": 3000
+        },
+        "machine_width": {
+            "default_value": 246
+        },
+        "machine_depth": {
+            "default_value": 152
+        },
+        "machine_height": {
+            "default_value": 155
+        },
+        "gantry_height": {
+            "default_value": 60,
+            "comment": "This needs to be filled in"
+        },
+        "machine_nozzle_head_distance": {
+            "default_value": 3,
+            "comment": "This needs to be filled in"
+        },
+        "machine_heat_zone_length": {
+            "default_value": 16,
+            "comment": "This needs to be filled in"
+        },
+        "machine_heated_bed": {
+            "default_value": true
+        },
+        "machine_max_feedrate_x": {
+            "default_value": 300
+        },
+        "machine_max_feedrate_y": {
+            "default_value": 300
+        },
+        "machine_max_feedrate_z": {
+            "default_value": 19.5
+        },
+        "machine_max_feedrate_e": {
+            "default_value": 26
+        },
+        "machine_center_is_zero": { "default_value": true },
+        "machine_extruder_count": {
+            "default_value": 2
+        },
+        "machine_start_gcode": {
+            "default_value": "; -- START GCODE Rep2x -- \n; begin print\nM136 ;(enable build)\nM73 P0 ;(set build percentage to zero)\n; homing\nG162 X Y F2000 ;(home XY axes maximum, standard feedrate 2000 mm/min)\nG161 Z F900 ;(home Z axis minimum, standard feedrate 900 mm/min)\nG92 X0 Y0 Z-5 A0 B0 ;(set Z to -5)\nG1 Z0.0 F900 ;(move Z to '0', standard feedrate 900 mm/min)\nG161 Z F100 ;(home Z axis minimum, standard feedrate 100 mm/min)\nM132 X Y Z A B ;(Recall stored home offsets for XYZAB axis)\n; set start position\nG92 X152 Y72 Z0 A0 B0 ;(set zero for X and Y)\nG1 X-112 Y-73 Z150 F3300.0 ;(move to waiting position, standard feedrate 3300 mm/min)\nG130 X20 Y20 A20 B20 ;(Lower stepper Vrefs while heating)\n; heat platform\nM109 S{material_bed_temperature} T0 ;(Set build platform temperature in degrees Celsuis)\nM134 T0 ;(Wait for platform to heat up)\n; EXTRUDER HEAT BEGIN\nM135 T0 ;(Set the extruder as the current Extruder)\nM104 S{material_print_temperature} T0 ;(Set extruder temperature in degrees Celsius)\nM133 T0 ;(Wait for extruder to heat up)\n; end start sequence\nG130 X127 Y127 A127 B127 ;(Set Stepper motor Vref to defaults)\n; initial purge\nG92 A0 ;zero the extruded length\nG1 F200 A10 ;extrude 10 mm of feed stock\nG92 A0 ;zero the extruded length again\n; -- END OF START GCODE --"
+        },
+
+        "machine_end_gcode": {
+            "default_value": "; -- END GCODE -- \n; end position\nM18 A B ;(Turn off A and B Steppers)\nG1 Z{machine_height} F900 ;(Move Z to machine_height, feedrate 900 mm/min)\nG162 X Y F2000 ; (Home Z Axis Maximum, feedrate 2000 mm/min)\nM18 X Y Z ;(Turn off steppers after a build)\n; cool bed\nM140 S0 T0 ;(Cool Bed)\n; cool extruders\nM104 S0 T0 ;(Cool Right extruder)\n; end print\nM73 P100 ;(end  build progress)\nM70 P5 ;(We <3 Making Things!)\nM72 P1 ;( Play Ta-Da song )\nM137 ;(build end notification)"
+        },
+        "retraction_amount": {
+            "default_value": 1.5
+        },
+        "retraction_speed": {
+            "default_value": 25
+        },
+        "material_diameter": { "default_value": 1.75 },
+        "default_material_print_temperature": { "default_value": 230 },
+        "material_print_temperature_layer_0": { "default_value": 0 },
+        "material_initial_print_temperature": {
+            "enabled": false,
+            "value": "max(-273.15, material_print_temperature)",
+            "default_value": "max(-273.15, material_print_temperature)"
+        },
+        "material_final_print_temperature": {
+            "enabled": false,
+            "value": "max(-273.15, material_print_temperature)",
+            "default_value": "max(-273.15, material_print_temperature)"
+        },
+        "material_bed_temperature": {
+            "default_value": 130,
+            "maximum_value_warning": "150"
+        },
+        "material_bed_temperature_layer_0": {
+            "default_value": "material_bed_temperature",
+            "maximum_value_warning": "150",
+            "enabled": false
+        },
+        "speed_print": { "default_value": 100 },
+        "speed_travel": {
+            "default_value": 175
+        },
+        "speed_layer_0": {
+            "value": "speed_print * 30 / 90"
+        },
+        "acceleration_enabled": { "enabled": false },
+        "jerk_enabled": { "enabled": false },
+        "adhesion_type": { "default_value": "raft" },
+        "raft_margin": { "default_value": 3 }
+    }
+}
