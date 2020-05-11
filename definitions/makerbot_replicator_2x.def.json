@@ -5,7 +5,7 @@
     "inherits": "fdmprinter",
     "metadata": {
         "visible": true,
-        "author": "TheUltimakerCommunity",
+        "author": "rpavlik",
         "manufacturer": "MakerBot",
         "category": "Other",
         "file_formats": "application/x3g",
@@ -112,7 +112,7 @@
         },
         "acceleration_enabled": { "enabled": false },
         "jerk_enabled": { "enabled": false },
-        "adhesion_type": { "default_value": "raft" },
+        "adhesion_type": { "default_value": "brim" },
         "raft_margin": { "default_value": 3 }
     }
 }
