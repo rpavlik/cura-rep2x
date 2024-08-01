@@ -4,9 +4,13 @@
 my Replicator 2X, in conjunction with
 <https://github.com/rpavlik/Rep2x-GCodeSnippets-PrusaSlicer>
 
-However, you're welcome to use and contribute to these. Additionally, you might
+However, you're welcome to use and adapt these. Additionally, you might
 like the start/end GCODE from that repo, which should just need some minor
 adaptations to use in Cura.
+
+This is worthwhile work but I have no capacity to maintain it in any sense.
+
+**This repo is unmaintained.**
 
 ## About
 
